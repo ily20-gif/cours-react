@@ -1,0 +1,86 @@
+
+body {
+    font-family: "Inter", sans-serif;
+}
+.slide {
+    display: none;
+    min-height: 550px; /* Augmenté pour le contenu */
+    padding: 4rem;
+}
+.slide.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+pre {
+    background-color: #f4f4f5; /* zinc-100 */
+    border-radius: 0.5rem;
+    padding: 1rem;
+    overflow-x: auto;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    white-space: pre-wrap; /* Permet le retour à la ligne pour le code */
+}
+code {
+    font-family: monospace;
+}
+@media (max-width: 768px) {
+  .slide {
+    padding: 2rem 1.5rem;
+    min-height: auto;
+  }
+  
+  h1, h2 {
+    font-size: 2rem !important;
+    line-height: 1.2;
+  }
+  
+  h3 {
+    font-size: 1.5rem !important;
+  }
+  
+  .text-4xl {
+    font-size: 1.75rem !important;
+  }
+  
+  .text-5xl {
+    font-size: 2.25rem !important;
+  }
+  
+  .text-3xl {
+    font-size: 1.5rem !important;
+  }
+  
+  .text-2xl {
+    font-size: 1.25rem !important;
+  }
+  
+  .text-xl {
+    font-size: 1.125rem !important;
+  }
+  
+  .text-lg {
+    font-size: 1rem !important;
+  }
+  
+  pre {
+    font-size: 0.8rem;
+    padding: 0.75rem;
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .slide {
+    padding: 1.5rem 1rem;
+  }
+  
+  h1, h2 {
+    font-size: 1.75rem !important;
+  }
+  
+  .text-5xl {
+    font-size: 2rem !important;
+  }
+}

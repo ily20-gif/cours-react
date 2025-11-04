@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Présentation JavaScript & React</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body
+    class="bg-gray-100 flex flex-col items-center justify-center min-h-screen p-4"
+  >
+    <div
+      id="presentation"
+      class="w-full max-w-5xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col"
+    >
+      <!-- Slides Container -->
+      <div id="slides-container" class="flex-grow">
+        <!-- SLIDE 1: TITRE -->
+        <div class="slide text-center bg-sky-500 text-white">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/0/05/Logo_ofppt.png"
+            alt="Logo OFPPT"
+            class="w-24 h-24 md:w-32 md:h-32  mb-6 md:mb-8 rounded-xl bg-white shadow-lg p-3 mx-auto border border-white/30 hover:scale-105 transition-transform duration-300"
+          />
+
+          <!-- Title -->
+          <h1
+            class="text-3xl md:text-5xl font-extrabold tracking-tight drop-shadow-lg mb-3"
+          >
+            Développement Front-End avec React
+          </h1>
+
+          <!-- Subtitle -->
+          <p class="text-xl md:text-2xl font-medium opacity-90 mb-6">
+            Formation Interactive et Pratique
+          </p>
+
+          <!-- Trainer Info -->
+          <p
+            class="text-base md:text-lg font-light tracking-wide bg-white/10 px-4 py-2 rounded-lg backdrop-blur-sm shadow-sm"
+          >
+            <span class="font-semibold text-yellow-300">Formateur :</span>
+            Oussama Elhousni
+          </p>
+        </div>
+
+        <!-- SLIDE 2: SÉPARATEUR JS -->
+        <div class="slide text-center bg-sky-500 text-white ">
+          <h2 class="text-4xl md:text-5xl font-extrabold">PARTIE 1 : JAVASCRIPT</h2>
+          <p class="text-2xl md:text-3xl mt-4">Les Fondations Essentielles du Web</p>
+        </div>
+
+        <!-- SLIDE 3: 1. INTRODUCTION À JS -->
+
+       <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold text-gray-800 mb-6 text-center md:text-left">
+          1. Introduction à JavaScript (JS)
+        </h2>
+
+        <ul class="list-disc pl-5 space-y-3 text-base sm:text-lg md:text-xl text-gray-700">
+          <li>
+            <b>Qu'est-ce que JS ?</b> Le langage de programmation du Web.  
+            Il rend les pages interactives.
+          </li>
+
+          <li>
+            <b>Pourquoi l'apprendre ?</b>  
+            C'est indispensable pour le Front-end (React, Vue, Angular) et aussi utilisé en Back-end (Node.js).
+          </li>
+
+          <li>
+            <b>Où écrire du code ?</b>
+            <ul class="list-[circle] pl-6 mt-2 space-y-1">
+              <li>Balise <code>&lt;script&gt;</code> (dans le HTML).</li>
+              <li>Fichier externe : <code>&lt;script src="app.js"&gt;&lt;/script&gt;</code>.</li>
+              <li>Console du navigateur (pour le débogage).</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h3 class="font-semibold text-lg sm:text-xl text-gray-800 mt-8">
+          Premier programme :
+        </h3>
+
+        <pre class="bg-gray-100 p-3 sm:p-4 rounded-lg overflow-x-auto text-sm sm:text-base mt-3">
+      <code>console.log("Bonjour le monde !"); // Le plus utilisé pour le débogage
+      alert("Attention !"); // Bloquant, à éviter en production</code>
+        </pre>
+      </div>  
+
+
+        <!-- SLIDE 4: 2. VARIABLES ET TYPES (LET/CONST/VAR) -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            2. Variables : let, const, var
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <h3 class="font-bold text-2xl text-red-500">const</h3>
+              <p class="text-lg text-gray-700">
+                Déclare une constante. <b>NE PEUT</b> être réassignée après
+                initialisation.
+              </p>
+              <pre><code>const PI = 3.14; 
+// PI = 3.1415; <-- ERREUR</code></pre>
+            </div>
+            <div>
+              <h3 class="font-bold text-2xl text-blue-500">let</h3>
+              <p class="text-lg text-gray-700">
+                Déclare une variable avec une portée de bloc (`{}`).
+                <b>PEUT</b> être réassignée.
+              </p>
+              <pre><code>let compteur = 0;
+compteur = 1;     // OK</code></pre>
+            </div>
+            <div>
+              <h3 class="font-bold text-2xl text-gray-500">var (À ÉVITER)</h3>
+              <p class="text-lg text-gray-700">
+                Déclare une variable avec une portée de fonction.
+                <b>Problèmes de portée</b> (hoisting).
+              </p>
+              <pre><code>if (true) {
+   var x = 10; 
+}// console.log(x); // 10 (Fuite hors du bloc)</code></pre>
+            </div>
+          </div>
+          <p class="text-xl text-emerald-600 font-semibold mt-4">
+            ⭐ <b>Règle d'or :</b> Toujours utiliser `const` par défaut. Si vous
+            devez réassigner, utilisez `let`.
+          </p>
+        </div>
+
+        <!-- SLIDE 5: 2. TYPES PRIMITIFS -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            2. Types de Données Primitifs
+          </h2>
+          <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
+            <li><b>String :</b> Texte (ex: `"React"`).</li>
+            <li>
+              <b>Number :</b> Nombres entiers et décimaux (ex: `10`, `3.14`).
+            </li>
+            <li><b>Boolean :</b> Vrai ou Faux (ex: `true`, `false`).</li>
+            <li>
+              <b>Null :</b> Absence intentionnelle de valeur (ex: `let data =
+              null;`).
+            </li>
+            <li>
+              <b>Undefined :</b> Variable déclarée mais non initialisée (valeur
+              par défaut).
+            </li>
+            <li><b>Symbol / BigInt :</b> Utilisés pour des cas avancés.</li>
+          </ul>
+          <h3 class="font-semibold text-lg text-gray-800 mt-6">
+            Vérifier le type :
+          </h3>
+          <pre><code>let age = 30;
+let nom = "Alice";
+console.log(typeof age); // "number"
+console.log(typeof nom); // "string"</code></pre>
+        </div>
+
+        <!-- SLIDE 6: 3. OPÉRATEURS DE COMPARAISON -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            3. Opérateurs de Comparaison
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <h3 class="font-bold text-2xl text-red-500">
+                Double Égal (==) - Comparaison Lâche (Loose)
+              </h3>
+              <p class="text-lg text-gray-700">
+                Compare la <b>valeur</b> en effectuant une conversion de type
+                implicite.
+              </p>
+              <pre><code>console.log(1 == '1');   // true
+console.log(0 == false); // true
+console.log(null == undefined); // true</code></pre>
+            </div>
+            <div>
+              <h3 class="font-bold text-2xl text-emerald-600">
+                Triple Égal (===) - Comparaison Stricte
+              </h3>
+              <p class="text-lg text-gray-700">
+                Compare la **valeur ET le type**.
+                <b>Toujours utiliser ===</b> pour éviter les surprises.
+              </p>
+              <pre><code>console.log(1 === '1');   // false
+console.log(0 === false); // false
+console.log(null === undefined); // false</code></pre>
+            </div>
+          </div>
+          <h3 class="font-semibold text-lg text-gray-800 mt-6">Autres :</h3>
+          <ul class="list-disc pl-6 text-xl text-gray-700">
+            <li>
+              Arithmétiques : `+`, `-`, `*`, `/`, `%` (modulo), `**`
+              (puissance).
+            </li>
+            <li>Logiques : `&&` (ET), `||` (OU), `!` (NON).</li>
+            <li>
+              Ternaire : `condition ? vrai : faux;` (pour les conditions
+              simples).
+            </li>
+          </ul>
+        </div>
+
+        <!-- SLIDE 7: 4. STRUCTURES CONDITIONNELLES -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            4. Structures Conditionnelles
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h3 class="font-bold text-2xl text-blue-500">
+                if / else if / else
+              </h3>
+              <p class="text-lg text-gray-700">
+                Pour vérifier des conditions basées sur des expressions
+                booléennes.
+              </p>
+                  <pre><code>const note = 85;
+if (note > 90) {
+  console.log("A");
+} else if (note > 80) {
+  console.log("B"); // C'est ici
+} else {
+  console.log("C");
+}</code></pre>
+            </div>
+            <div>
+              <h3 class="font-bold text-2xl text-purple-500">switch / case</h3>
+              <p class="text-lg text-gray-700">
+                Pour vérifier si une variable correspond à **plusieurs valeurs
+                spécifiques**.
+              </p>
+<pre><code>const jour = 'Lundi';
+switch (jour) {
+  case 'Samedi':
+  case 'Dimanche':
+    console.log("WE");
+    break;
+  default:
+    console.log("Semaine");
+}</code></pre>
+      </div>
+          </div>
+          <p class="text-xl text-gray-600 mt-4 italic">
+            Utilisez `switch` quand vous comparez une seule valeur à plusieurs
+            constantes. Sinon, utilisez `if/else`.
+          </p>
+        </div>
+
+        <!-- SLIDE 8: 5. BOUCLES (FOR) -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            5. Boucles : for, while
+          </h2>
+          <h3 class="font-bold text-2xl text-sky-600">
+            La boucle `for` (itération par index)
+          </h3>
+          <pre><code>// 1. Initialisation (let i = 0)
+// 2. Condition de continuation (i < 5)
+// 3. Incrémentation (i++)
+for (let i = 0; i < 5; i++) {
+  console.log("Tour " + i);
+}</code></pre>
+          <h3 class="font-bold text-2xl text-sky-600 mt-4">
+            Boucles `while` et `do...while`
+          </h3>
+          <pre><code>// while : la condition est vérifiée avant chaque tour
+let x = 0;
+while (x < 3) {
+  console.log("x est : " + x);
+  x++;
+}
+
+// do...while : s'exécute au moins une fois
+let y = 0;
+do {
+  console.log("y est : " + y);
+} while (y > 0); // La boucle s'arrête après 1 tour</code></pre>
+        </div>
+
+        <!-- SLIDE 9: 5. BOUCLES (OF/IN) -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            5. Boucles : for...of et for...in
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h3 class="font-bold text-2xl text-emerald-600">
+                for...of (Valeurs)
+              </h3>
+              <p class="text-lg text-gray-700">
+                Itère sur les <b>VALEURS</b> d'objets itérables (tableaux,
+                chaînes de caractères, etc.).
+              </p>
+              <pre><code>const couleurs = ['rouge', 'vert', 'bleu'];
+for (const couleur of couleurs) {
+  console.log(couleur);
+}
+// Affiche : rouge, vert, bleu</code></pre>
+            </div>
+            <div>
+              <h3 class="font-bold text-2xl text-red-600">
+                for...in (Clés/Index)
+              </h3>
+              <p class="text-lg text-gray-700">
+                Itère sur les <b>CLÉS (propriétés)</b> d'un objet.
+              </p>
+              <pre><code>const voiture = { marque: 'BMW', annee: 2020 };
+for (const cle in voiture) {
+  console.log(cle + ' : ' + voiture[cle]);
+}
+// Affiche : marque : BMW, annee : 2020</code></pre>
+            </div>
+          </div>
+          <h3 class="font-semibold text-lg text-gray-800 mt-6">Contrôle :</h3>
+          <pre><code>for (let i = 0; i < 10; i++) {
+  if (i === 3) continue; // Passe au tour suivant
+  if (i === 7) break;    // Arrête la boucle
+  console.log(i);
+}</code></pre>
+        </div>
+
+        <!-- SLIDE 10: 6. FONCTIONS (DÉCLARATION) -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">6. Fonctions</h2>
+          <h3 class="font-bold text-2xl text-sky-600">Déclaration Classique</h3>
+          <p class="text-lg text-gray-700">
+            Blocs de code réutilisables qui peuvent prendre des
+            <b>paramètres</b> et retourner une <b>valeur</b> (`return`).
+          </p>
+          <pre><code>function addition(a, b = 1) { // b est un paramètre par défaut
+  const resultat = a + b;
+  return resultat;
+  // Rien après return n'est exécuté
+}
+
+const somme = addition(5, 3); // 8
+const unDePlus = addition(10); // 11 (b utilise sa valeur par défaut)</code></pre>
+          <h3 class="font-bold text-2xl text-sky-600 mt-4">
+            Fonctions Anonymes
+          </h3>
+          <pre><code>// Utilisée souvent comme argument (callback)
+document.getElementById('btn').addEventListener('click', function() {
+  console.log('Clic !'); 
+});</code></pre>
+        </div>
+
+        <!-- SLIDE 11: 6. FONCTIONS (FLÉCHÉES / SCOPE) -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            6. Fonctions : Fléchées & Portée (Scope)
+          </h2>
+          <h3 class="font-bold text-2xl text-emerald-600">
+            Fonctions Fléchées (Arrow Functions) - ES6
+          </h3>
+          <p class="text-lg text-gray-700">
+            Syntaxe concise. N'a <b>pas son propre `this`</b> (très important en
+            React).
+          </p>
+          <pre><code>// Longue
+const multiplication = (a, b) => {
+  return a * b;
+};
+
+// Courte (return implicite pour une seule expression)
+const carre = n => n * n; </code></pre>
+          <h3 class="font-bold text-2xl text-red-600 mt-4">
+            Portée (Scope) des Variables
+          </h3>
+          <p class="text-lg text-gray-700">
+            Le scope détermine où une variable est accessible.
+            <b>Scope de Bloc</b> (avec `let`/`const`) est préférable.
+          </p>
+          <pre><code>const globalVar = 'Globale';
+function maFonction() {
+  const localVar = 'Locale'; // Inaccessible à l'extérieur
+  console.log(globalVar); 
+}</code></pre>
+        </div>
+
+        <!-- SLIDE 12: 7. TABLEAUX (BASES) -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            7. Tableaux (Arrays)
+          </h2>
+          <h3 class="font-bold text-2xl text-sky-600">Création et Accès</h3>
+          <p class="text-lg text-gray-700">
+            Les tableaux sont des listes ordonnées d'éléments (indexés à partir
+            de 0).
+          </p>
+          <pre><code>const legumes = ['carotte', 'tomate', 'oignon'];
+
+console.log(legumes[0]);   // Accès : 'carotte'
+console.log(legumes.length); // Propriété : 3</code></pre>
+          <h3 class="font-bold text-2xl text-sky-600 mt-4">
+            Mutations (Modification du tableau original)
+          </h3>
+          <ul class="list-disc pl-6 space-y-1 text-lg text-gray-700">
+            <li>`push(e)` : Ajoute un élément à la fin.</li>
+            <li>`pop()` : Retire le dernier élément.</li>
+            <li>`unshift(e)` : Ajoute un élément au début.</li>
+            <li>`shift()` : Retire le premier élément.</li>
+          </ul>
+          <pre><code>legumes.push('pomme de terre'); // ['carotte', ..., 'pomme de terre']</code></pre>
+        </div>
+
+        <!-- SLIDE 13: 7. TABLEAUX (MÉTHODES AVANCÉES) -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            7. Tableaux : Méthodes de Transformation
+          </h2>
+          <p class="text-xl text-gray-700 mb-4">
+            Ces méthodes <b>ne modifient pas</b> le tableau original et sont
+            essentielles en React (Programmation fonctionnelle).
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <h3 class="font-bold text-2xl text-purple-600">.map()</h3>
+              <p>
+                Crée un <b>nouveau tableau</b> en appliquant une fonction à
+                chaque élément.
+              </p>
+              <pre><code>[1, 2].map(n => n * 2); 
+// [2, 4]</code></pre>
+            </div>
+            <div>
+              <h3 class="font-bold text-2xl text-purple-600">.filter()</h3>
+              <p>
+                Crée un <b>nouveau tableau</b> avec les éléments qui passent un
+                test (retournent `true`).
+              </p>
+              <pre><code>[1, 2, 3].filter(n => n > 1);
+// [2, 3]</code></pre>
+            </div>
+            <div>
+              <h3 class="font-bold text-2xl text-purple-600">.reduce()</h3>
+              <p>
+                Exécute une fonction sur chaque élément pour produire une
+                <b>seule valeur</b> (accumulateur).
+              </p>
+              <pre><code>[1, 2, 3].reduce((acc, n) => acc + n, 0); 
+// 6</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 14: 8. OBJETS (BASES) -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">8. Objets</h2>
+          <h3 class="font-bold text-2xl text-sky-600">Création et Accès</h3>
+          <p class="text-lg text-gray-700">
+            Les objets sont des collections de paires clé/valeur non ordonnées
+            (propriétés).
+          </p>
+          <pre><code>const utilisateur = {
+  nom: 'Dupont',
+  age: 25,
+  estActif: true,
+  saluer: function() { return 'Bonjour ' + this.nom; }
+};
+
+// Accès 1 (dot notation)
+console.log(utilisateur.nom);  // 'Dupont'
+
+// Accès 2 (bracket notation, utile pour les clés dynamiques)
+console.log(utilisateur['age']); // 25</code></pre>
+          <h3 class="font-bold text-2xl text-sky-600 mt-4">
+            Modification / Suppression
+          </h3>
+          <pre><code>utilisateur.age = 26; // Modifier
+delete utilisateur.estActif; // Supprimer</code></pre>
+        </div>
+
+        <!-- SLIDE 15: 8. OBJETS (MÉTHODES ET DESTRUCTURING) -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            8. Objets : Méthodes Utiles & Destructuring
+          </h2>
+          <h3 class="font-bold text-2xl text-emerald-600">
+            Méthodes de Parcours
+          </h3>
+          <pre><code>Object.keys(utilisateur);   // ['nom', 'age', 'saluer']
+Object.values(utilisateur); // ['Dupont', 26, function...]
+Object.entries(utilisateur); // [['nom', 'Dupont'], ['age', 26], ...]</code></pre>
+          <h3 class="font-bold text-2xl text-emerald-600 mt-4">
+            Destructuring (Démantèlement) - ES6
+          </h3>
+          <p class="text-lg text-gray-700">
+            Extrait des valeurs d'un objet ou d'un tableau en variables
+            distinctes.
+          </p>
+          <pre><code>const { nom, age } = utilisateur;
+console.log(nom); // 'Dupont'
+console.log(age); // 26
+
+const [premiere, ...reste] = [1, 2, 3];
+console.log(premiere); // 1</code></pre>
+        </div>
+
+        <!-- SLIDE 16: 9. DOM (QU'EST-CE QUE LE DOM) -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            9. DOM (Document Object Model)
+          </h2>
+          <h3 class="font-bold text-2xl text-sky-600">
+            Qu'est-ce que le DOM ?
+          </h3>
+          <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
+            <li>
+              C'est une interface de programmation pour les documents HTML et
+              XML.
+            </li>
+            <li>
+              Il représente la structure de la page comme un **arbre de nœuds**.
+            </li>
+            <li>
+              JavaScript utilise le DOM pour accéder, modifier et manipuler la
+              page web.
+            </li>
+            <li>
+              <b
+                >React ne manipule pas directement le DOM, il utilise le Virtual
+                DOM (voir plus tard).</b
+              >
+            </li>
+          </ul>
+          <img
+            src="https://placehold.co/400x150/f0f9ff/0369a1?text=Arbre+du+DOM"
+            alt="Image de l'arbre du DOM"
+            class="mx-auto mt-6 rounded-lg shadow-lg"
+          />
+        </div>
+
+        <!-- SLIDE 17: 9. DOM (SÉLECTION ET MODIFICATION) -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            9. DOM : Sélection et Contenu
+          </h2>
+          <h3 class="font-bold text-2xl text-emerald-600">
+            Sélectionner des éléments
+          </h3>
+          <pre><code>// Par ID (le plus rapide)
+const titre = document.getElementById('main-title'); 
+
+// Par sélecteur CSS (le plus flexible)
+const premierParagraphe = document.querySelector('.content p');
+const tousLesLiens = document.querySelectorAll('a'); </code></pre>
+          <h3 class="font-bold text-2xl text-emerald-600 mt-4">
+            Modifier le contenu
+          </h3>
+          <pre><code>titre.textContent = "Nouveau Titre"; 
+// Sécurisé, insère du texte simple
+
+titre.innerHTML = "<em>Titre Italique</em>"; 
+// Peut insérer du HTML (attention à la sécurité !)</code></pre>
+        </div>
+
+        <!-- SLIDE 18: 10. ÉVÉNEMENTS (BASES) -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            10. Événements : addEventListener
+          </h2>
+          <h3 class="font-bold text-2xl text-sky-600">
+            Qu'est-ce qu'un événement ?
+          </h3>
+          <p class="text-lg text-gray-700">
+            Une action du navigateur ou de l'utilisateur (clic, survol,
+            chargement, soumission de formulaire, touche enfoncée).
+          </p>
+          <h3 class="font-bold text-2xl text-sky-600 mt-4">
+            Attacher un écouteur
+          </h3>
+          <pre><code>const bouton = document.querySelector('#mon-bouton');
+
+bouton.addEventListener('click', function(event) {
+  console.log('Bouton cliqué !');
+  // L'objet `event` contient des informations sur l'événement
+  event.preventDefault(); // Empêche l'action par défaut (ex: soumission de formulaire)
+});</code></pre>
+          <ul class="list-disc pl-6 space-y-1 text-lg text-gray-700 mt-4">
+            <li>
+              Types fréquents : `click`, `submit`, `change`, `input`,
+              `mouseover`, `keydown`.
+            </li>
+          </ul>
+        </div>
+
+        <!-- SLIDE 19: 10. ÉVÉNEMENTS (PROPAGATION) -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            10. Événements : Propagation & Délégation
+          </h2>
+          <h3 class="font-bold text-2xl text-red-600">
+            Propagation (Bubbling)
+          </h3>
+          <p class="text-lg text-gray-700">
+            Lorsqu'un événement se produit, il remonte du nœud cible vers la
+            racine du DOM.
+          </p>
+          <img
+            src="https://placehold.co/400x100/f0f9ff/0369a1?text=Clic+sur+Enfant+%3E+Bullez+vers+Parent"
+            alt="Propagation des événements"
+            class="mx-auto mt-4 rounded-lg shadow-lg"
+          />
+          <h3 class="font-bold text-2xl text-red-600 mt-4">
+            Délégation d'Événements
+          </h3>
+          <p class="text-lg text-gray-700">
+            Attacher un seul écouteur à un élément parent pour gérer les
+            événements de tous ses enfants (même ceux ajoutés dynamiquement).
+          </p>
+          <pre><code>parent.addEventListener('click', function(e) {
+  if (e.target.tagName === 'LI') {
+    console.log('Élément de liste cliqué:', e.target.textContent);
+  }
+});</code></pre>
+        </div>
+
+        <!-- SLIDE 20: 11. ES6+ FEATURES -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            11. ES6+ Features (Modern JS)
+          </h2>
+          <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
+            <li>
+              <b>Template Literals :</b> Chaînes de caractères avec les
+              backticks (\` \`). Permet l'interpolation de variables.
+              <pre><code>const nom = "Bob"; 
+const msg = `Salut ${nom}, Bienvenue !`;</code></pre>
+            </li>
+            <li>
+              <b>Spread Operator (...) :</b> Pour étendre un itérable
+              (array/objet) en éléments individuels. Utile pour
+              cloner/fusionner.
+              <pre><code>const a = [1, 2];
+const b = [...a, 3, 4]; // [1, 2, 3, 4]</code></pre>
+            </li>
+            <li>
+              <b>Modules (import/export) :</b> Structure le code en fichiers
+              réutilisables. Essentiel pour React.
+            </li>
+          </ul>
+        </div>
+
+        <!-- SLIDE 21: 12. ASYNCHRONE (BASES) -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            12. Programmation Asynchrone
+          </h2>
+          <h3 class="font-bold text-2xl text-red-600">
+            Synchrone vs Asynchrone
+          </h3>
+          <p class="text-lg text-gray-700">
+            Le JS est par défaut <b>synchrone</b> (une ligne après l'autre).
+            L'asynchrone (ex: appels API) permet aux autres tâches de s'exécuter
+            pendant l'attente.
+          </p>
+          <h3 class="font-bold text-2xl text-red-600 mt-4">
+            setTimeout et Callbacks
+          </h3>
+          <pre><code>// Fonction de rappel (callback) exécutée après un délai
+console.log('Début');
+setTimeout(() => {
+  console.log('2 secondes écoulées');
+}, 2000);
+console.log('Fin (exécuté immédiatement)');</code></pre>
+          <p class="text-lg text-gray-500 italic mt-4">
+            *Ceci était géré par les Callbacks (provoque le "Callback Hell").*
+          </p>
+        </div>
+
+        <!-- SLIDE 22: 12. ASYNCHRONE (PROMISES, ASYNC/AWAIT) -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            12. Asynchrone : Promises et async/await
+          </h2>
+          <h3 class="font-bold text-2xl text-emerald-600">
+            Promises (Promesses)
+          </h3>
+          <p class="text-lg text-gray-700">
+            Objet représentant l'achèvement (ou l'échec) d'une opération
+            asynchrone.
+          </p>
+          <pre><code>fetch('/api/data')
+  .then(response => response.json()) // Opération réussie
+  .then(data => console.log(data))
+  .catch(error => console.error(error)) // Opération échouée
+  .finally(() => console.log('Terminé')); // Qu'importe le résultat</code></pre>
+          <h3 class="font-bold text-2xl text-emerald-600 mt-4">
+            Async/Await (ES2017)
+          </h3>
+          <p class="text-lg text-gray-700">
+            Simplifie la syntaxe des promesses pour qu'elle ressemble à du code
+            synchrone.
+          </p>
+          <pre><code>async function getData() {
+  try {
+    const response = await fetch('/api/data');
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error("Erreur de Fetch:", error);
+  }
+}</code></pre>
+        </div>
+
+        <!-- SLIDE 23: SÉPARATEUR REACT -->
+        <div class="slide text-center bg-sky-500 text-white">
+          <h2 class="text-4xl md:text-5xl font-extrabold">PARTIE 2 : REACT</h2>
+          <p class=" text-2xl md:text-3xl  mt-4">
+            Développement d'Interface Utilisateur Moderne
+          </p>
+        </div>
+
+        <!-- SLIDE 24: 13. INTRODUCTION À REACT -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            13. Introduction à React
+          </h2>
+          <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
+            <li>
+              <b>Qu'est-ce que React ?</b> Une bibliothèque JS pour construire
+              des interfaces utilisateur (UI) déclaratives.
+            </li>
+            <li>
+              <b>Philosophie :</b> "UI = f(état)". L'UI n'est qu'une fonction de
+              l'état actuel de l'application.
+            </li>
+            <li>
+              <b>Différences avec vanilla JS :</b> React gère les mises à jour
+              du DOM pour vous, vous vous concentrez sur la gestion de l'état.
+            </li>
+            <li>
+              <b>Installation :</b> Typiquement via des outils comme Vite ou
+              Next.js (remplace Create React App).
+            </li>
+          </ul>
+          <h3 class="font-bold text-2xl text-sky-600 mt-4">Le Virtual DOM</h3>
+          <p class="text-lg text-gray-700">
+            Une représentation légère du DOM réel, gardée en mémoire par React.
+            Les changements sont d'abord appliqués au V-DOM, puis React calcule
+            les différences (diffing) et met à jour uniquement les parties
+            nécessaires du DOM réel (minimisation des opérations coûteuses).
+          </p>
+        </div>
+
+        <!-- SLIDE 25: 14. JSX -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            14. JSX : Syntaxe
+          </h2>
+          <h3 class="font-bold text-2xl text-sky-600">Qu'est-ce que JSX ?</h3>
+          <p class="text-lg text-gray-700">
+            JavaScript XML. C'est une extension de syntaxe qui permet d'écrire
+            du balisage HTML directement dans les fichiers JavaScript.
+          </p>
+          <h3 class="font-bold text-2xl text-sky-600 mt-4">
+            Règles et Expressions
+          </h3>
+          <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
+            <li>
+              <b>Unique Parent :</b> Tout le JSX retourné doit être enveloppé
+              dans un seul élément parent (ou un `&lt;&gt;&lt;/&gt; `).
+            </li>
+            <li>
+              <b>camelCase pour Attributs :</b> Utiliser `className` au lieu de
+              `class`, `htmlFor` au lieu de `for`.
+            </li>
+            <li>
+              <b>Expressions JS :</b> Utiliser des accolades `{}` pour insérer
+              du JavaScript (variables, fonctions, calculs).
+            </li>
+          </ul>
+          <pre><code>const nom = "Jean";
+const element = &lt;h1 className="titre"&gt;Bonjour, {nom.toUpperCase()}&lt;/h1&gt;;</code></pre>
+        </div>
+
+        <!-- SLIDE 26: 15. COMPOSANTS -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            15. Composants Fonctionnels
+          </h2>
+          <h3 class="font-bold text-2xl text-emerald-600">
+            Le Bloc de Construction de React
+          </h3>
+          <p class="text-lg text-gray-700">
+            Un composant est une fonction JavaScript qui retourne du JSX. Il
+            doit commencer par une <b>majuscule</b></p>.
+          </p>
+          <pre><code>// 1. Définition du Composant (Nom: 'Bouton')
+function Bouton(props) {
+  return (
+    &lt;button onClick={props.action}&gt;
+      {props.texte} 
+    &lt;/button&gt;
+  );
+}
+
+// 2. Utilisation dans un autre Composant
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Composition&lt;/h2&gt;
+      &lt;Bouton texte="Cliquer ici" action={() => console.log('Clic!')} /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+          <p class="text-lg text-gray-500 italic mt-4">
+            On compose des composants pour construire des interfaces complexes.
+          </p>
+        </div>
+
+        <!-- SLIDE 27: 16. PROPS -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            16. Props (Propriétés)
+          </h2>
+          <h3 class="font-bold text-2xl text-sky-600">
+            Passage de Données (Flux Unidirectionnel)
+          </h3>
+          <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
+            <li>
+              Les props sont des <b>arguments</b> passés au composant
+              fonctionnel.
+            </li>
+            <li>
+              Elles sont <b>Immuables</b> (Read-Only). Un composant enfant ne
+              doit jamais modifier ses props.
+            </li>
+            <li>
+              <b>Destructuring des props :</b> Pratique courante pour la clarté.
+            </li>
+          </ul>
+          <pre><code>// Avant destructuring
+function Card(props) {
+  return &lt;h3&gt;{props.titre}&lt;/h3&gt;;
+}
+
+// Après destructuring
+function Card({ titre, contenu }) {
+  return &lt;div&gt;
+    &lt;h3&gt;{titre}&lt;/h3&gt;
+    &lt;p&gt;{contenu}&lt;/p&gt;
+  &lt;/div&gt;
+}</code></pre>
+        </div>
+
+        <!-- SLIDE 28: 17. STATE (useState) -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            17. State (État) : Le Hook useState
+          </h2>
+          <h3 class="font-bold text-2xl text-red-600">
+            Qu'est-ce que l'État ?
+          </h3>
+          <p class="text-lg text-gray-700">
+            Des données qui, lorsqu'elles changent, provoquent le
+            <b>re-rendu</b> du composant (son actualisation dans le DOM).
+          </p>
+          <h3 class="font-bold text-2xl text-red-600 mt-4">useState Hook :</h3>
+          <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
+            <li>
+              Retourne une paire : `[valeurActuelle, fonctionDeMiseÀJour]`.
+            </li>
+            <li>La mise à jour du state est <b>asynchrone</b>.</li>
+          </ul>
+          <pre><code>import { useState } => 'react';
+
+function Toggle() {
+  const [isOn, setIsOn] = useState(false); // Valeur initiale: false
+
+  const handleToggle = () => {
+    // Utilisez une fonction de mise à jour pour des dépendances sûres
+    setIsOn(prevIsOn => !prevIsOn);
+  };
+
+  return (
+    &lt;button onClick={handleToggle}&gt;
+      {isOn ? 'ON' : 'OFF'}
+    &lt;/button&gt;
+  );
+}</code></pre>
+        </div>
+
+        <!-- SLIDE 29: 18. useEffect I -->
+        <div class=" slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            18. useEffect Hook : Effets de bord
+          </h2>
+          <h3 class="font-bold text-2xl text-purple-600">
+            Qu'est-ce qu'un Effet de Bord ?
+          </h3>
+          <p class="text-lg text-gray-700">
+            Toute action qui interagit avec le monde extérieur à React (appels
+            API, timers, manipulation directe du DOM, gestion des abonnements).
+          </p>
+          <h3 class="font-bold text-2xl text-purple-600 mt-4">
+            Tableau de Dépendances `[]`
+          </h3>
+          <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
+            <li>`useEffect(() => { ... })` : S'exécute après chaque rendu.</li>
+            <li>
+              `useEffect(() => { ... }, [])` : S'exécute seulement au
+              <b>montage</b> (comme `componentDidMount`).
+            </li>
+            <li>
+              `useEffect(() => { ... }, [data])` : S'exécute au montage et quand
+              `data` change.
+            </li>
+          </ul>
+          <pre><code>useEffect(() => {
+  fetchData(); // Appel API
+}, []); // Se lance une seule fois (après le 1er rendu)</code></pre>
+        </div>
+
+        <!-- SLIDE 30: 18. useEffect II -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            18. useEffect : La Fonction de Nettoyage (Cleanup)
+          </h2>
+          <h3 class="font-bold text-2xl text-red-600">Pourquoi ?</h3>
+          <p class="text-lg text-gray-700">
+            Pour annuler ou nettoyer les effets qui persistent après que le
+            composant ait été retiré du DOM (démontage) ou avant que l'effet ne
+            s'exécute à nouveau.
+          </p>
+          <h3 class="font-bold text-2xl text-red-600 mt-4">Exemple : Timer</h3>
+          <pre><code>useEffect(() => {
+  const timer = setInterval(() => {
+    console.log('Tick');
+  }, 1000);
+
+  // Fonction de nettoyage
+  return () => {
+    clearInterval(timer); // Arrête le timer
+    console.log("Cleanup effectuée");
+  };
+}, []);</code></pre>
+          <p class="text-lg text-gray-500 italic mt-4">
+            Le `return` est essentiel pour éviter les fuites de mémoire (memory
+            leaks).
+          </p>
+        </div>
+
+        <!-- SLIDE 31: 19. ÉVÉNEMENTS DANS REACT -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            19. Gestion des Événements dans React
+          </h2>
+          <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
+            <li>
+              <b>Nommage :</b> Les gestionnaires d'événements sont en camelCase
+              (ex: `onClick`, `onChange`).
+            </li>
+            <li>
+              <b>Fonction Passée :</b> On passe une fonction, pas une chaîne de
+              caractères (`onClick={handleClick}`).
+            </li>
+            <li>
+              <b>Synthetic Events :</b> React enveloppe les événements natifs
+              dans un objet appelé `SyntheticEvent` qui assure une compatibilité
+              multi-navigateurs.
+            </li>
+          </ul>
+          <h3 class="font-bold text-2xl text-sky-600 mt-4">
+            Passer des Arguments
+          </h3>
+          <pre><code>function List() {
+  const itemId = 5;
+  // Utiliser une fonction fléchée inline pour passer un argument
+  return (
+    &lt;button onClick={() => handleClick(itemId)}&gt;
+      Supprimer l'item 5
+    &lt;/button&gt;
+  );
+}</code></pre>
+        </div>
+
+        <!-- SLIDE 32: 20. LISTES ET KEYS -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            20. Rendu de Listes et Keys
+          </h2>
+          <h3 class="font-bold text-2xl text-emerald-600">
+            Rendre des listes avec `.map()`
+          </h3>
+          <p class="text-lg text-gray-700">
+            En React, on utilise la méthode `.map()` pour transformer un tableau
+            de données en un tableau d'éléments JSX.
+          </p>
+          <pre><code>const utilisateurs = [
+  { id: 1, nom: 'Anna' }, 
+  { id: 2, nom: 'Bob' }
+];
+
+&lt;ul&gt;
+  {utilisateurs.map(user => (
+    &lt;li key={user.id}&gt;{user.nom}&lt;/li&gt;
+  ))}
+&lt;/ul&gt;</code></pre>
+          <h3 class="font-bold text-2xl text-red-600 mt-4">
+            L'Importance des `key`
+          </h3>
+          <ul class="list-disc pl-6 space-y-1 text-lg text-gray-700">
+            <li>
+              La `key` aide React à identifier quels éléments ont été modifiés,
+              ajoutés ou supprimés.
+            </li>
+            <li>
+              Elle doit être <b>unique</b> et <b>stable</b> (ID de la base de
+              données). N'utilisez <b>JAMAIS</b> l'index du tableau si la liste
+              peut changer de manière dynamique.
+            </li>
+          </ul>
+        </div>
+
+        <!-- SLIDE 33: 21. FORMULAIRES CONTRÔLÉS -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            21. Formulaires Contrôlés
+          </h2>
+          <h3 class="font-bold text-2xl text-sky-600">Le Contrôle par React</h3>
+          <p class="text-lg text-gray-700">
+            Un formulaire est "contrôlé" lorsque sa valeur est gérée par le
+            <b>state</b> de React.
+          </p>
+          <pre><code>import { useState } from 'react';
+
+function Formulaire() {
+  const [valeur, setValeur] = useState('');
+
+  const handleChange = (event) => {
+    // La valeur de l'input est toujours lue depuis l'objet event
+    setValeur(event.target.value); 
+  };
+
+  return (
+    &lt;input 
+      type="text" 
+      value={valeur} // La valeur affichée est lue depuis le state
+      onChange={handleChange} // Chaque frappe met à jour le state
+      placeholder="Votre nom"
+    /&gt;
+  );
+}</code></pre>
+          <p class="text-lg text-gray-500 italic mt-4">
+            C'est le pattern standard pour la gestion des inputs en React.
+          </p>
+        </div>
+      </div>
+      <!-- SLIDE 34: STYLING EN REACT (INTRODUCTION) -->
+<div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">22. Styling en React</h2>
+  <h3 class="font-bold text-2xl text-sky-600">Pourquoi le styling est important ?</h3>
+  <p class="text-lg text-gray-700">
+    Le style en React détermine l’apparence visuelle de vos composants. 
+    Vous pouvez utiliser différentes approches selon le niveau de complexité et de réutilisabilité souhaité.
+  </p>
+  <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700 mt-4">
+    <li><b>Inline Styles :</b> Style défini directement dans le JSX via un objet JavaScript.</li>
+    <li><b>CSS Externe :</b> Fichiers CSS globaux importés dans vos composants.</li>
+    <li><b>CSS Modules :</b> Styles locaux, évitent les conflits entre composants.</li>
+    <li><b>Bibliothèques CSS :</b> (ex : Tailwind, Bootstrap, MUI) pour accélérer le design.</li>
+  </ul>
+  <p class="text-xl text-emerald-600 font-semibold mt-6">
+    ⭐ Le choix dépend du projet : Tailwind pour la rapidité, CSS Modules pour la modularité.
+  </p>
+</div>
+
+<!-- SLIDE 35: INLINE ET CSS EXTERNE -->
+<div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">23. Styling : Inline & CSS Externe</h2>
+  <h3 class="font-bold text-2xl text-sky-600">1️⃣ Inline Styles</h3>
+  <p class="text-lg text-gray-700">
+    On utilise un objet JavaScript. Les noms de propriétés utilisent le format camelCase.
+  </p>
+  <pre><code>const style = { color: "blue", fontSize: "22px" };
+&lt;p style={style}&gt;Bonjour React !&lt;/p&gt;
+
+// Exemple dynamique :
+&lt;div style={{ backgroundColor: isActive ? "green" : "red" }}&gt;
+  {isActive ? "Actif" : "Inactif"}
+&lt;/div&gt;</code></pre>
+
+  <h3 class="font-bold text-2xl text-sky-600 mt-4">2️⃣ CSS Externe</h3>
+  <p class="text-lg text-gray-700">
+    Le style est défini dans un fichier CSS classique et importé dans le composant.
+  </p>
+  <pre><code>import "./App.css";
+
+function App() {
+  return &lt;h1 className="titre"&gt;Bienvenue dans React&lt;/h1&gt;;
+}
+
+// App.css
+.titre {
+  color: orange;
+  text-align: center;
+  font-family: Arial;
+}</code></pre>
+</div>
+
+<!-- SLIDE 36: CSS MODULES -->
+<div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">24. Styling : CSS Modules</h2>
+  <p class="text-lg text-gray-700">
+    Les <b>CSS Modules</b> permettent de créer des styles isolés pour chaque composant.
+    Le nom des classes est automatiquement rendu unique.
+  </p>
+  <pre><code>import styles from "./App.module.css";
+
+function App() {
+  return (
+    &lt;div className={styles.card}&gt;
+      &lt;h2 className={styles.title}&gt;Carte stylée&lt;/h2&gt;
+    &lt;/div&gt;
+  );
+}
+
+// App.module.css
+.card {
+  background-color: #f0f9ff;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.title {
+  color: #0369a1;
+}</code></pre>
+  <p class="text-xl text-emerald-600 font-semibold mt-4">
+    ✅ Avantage : pas de conflit de classes entre composants différents.
+  </p>
+</div>
+
+<!-- SLIDE 37: CONTEXT API (INTRODUCTION) -->
+<div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">25. Context API : Introduction</h2>
+  <p class="text-lg text-gray-700">
+    Le <b>Context API</b> permet de partager des données à travers plusieurs composants sans passer de props à chaque niveau.
+    On l’utilise souvent pour gérer :
+  </p>
+  <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700 mt-2">
+    <li>Le thème (clair/sombre)</li>
+    <li>L’utilisateur connecté</li>
+    <li>Les paramètres de langue</li>
+    <li>Le panier dans une boutique</li>
+  </ul>
+  <h3 class="font-bold text-2xl text-sky-600 mt-4">Structure de base</h3>
+  <pre><code>import { createContext } from "react";
+export const ThemeContext = createContext("light");</code></pre>
+  <p class="text-lg text-gray-700 mt-2">
+    Ensuite, on utilise un <b>Provider</b> pour fournir la valeur et le hook <b>useContext()</b> pour la lire.
+  </p>
+</div>
+
+<!-- SLIDE 38: CONTEXT API (UTILISATION) -->
+<div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">26. Context API : Fournir et Consommer</h2>
+  <h3 class="font-bold text-2xl text-emerald-600">1️⃣ Fournir le contexte</h3>
+  <pre><code>&lt;ThemeContext.Provider value="dark"&gt;
+  &lt;Navbar /&gt;
+&lt;/ThemeContext.Provider&gt;</code></pre>
+
+  <h3 class="font-bold text-2xl text-emerald-600 mt-4">2️⃣ Consommer avec useContext</h3>
+  <pre><code>import { useContext } from "react";
+import { ThemeContext } from "./ThemeContext";
+
+function Navbar() {
+  const theme = useContext(ThemeContext);
+  return &lt;h3&gt;Thème actuel : {theme}&lt;/h3&gt;;
+}</code></pre>
+
+  <p class="text-lg text-gray-700 mt-4">
+    ✅ <b>Avantage :</b> évite de répéter les props inutiles.  
+    ⚠️ <b>Attention :</b> chaque Provider crée un nouveau contexte isolé.
+  </p>
+</div>
+
+<!-- SLIDE 39: USEREF -->
+<div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">27. Hook useRef()</h2>
+  <h3 class="font-bold text-2xl text-sky-600">Qu’est-ce que useRef ?</h3>
+  <p class="text-lg text-gray-700">
+    <b>useRef()</b> permet de stocker une valeur persistante entre les rendus sans provoquer de re-render.
+  </p>
+  <h3 class="font-bold text-2xl text-sky-600 mt-4">Exemple : accéder à un élément DOM</h3>
+  <pre><code>import { useRef } from "react";
+
+function FocusInput() {
+  const inputRef = useRef();
+
+  const focusInput = () => {
+    inputRef.current.focus();
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;input ref={inputRef} placeholder="Cliquez sur le bouton"&gt;
+      &lt;button onClick={focusInput}&gt;Focus&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+  <p class="text-lg text-gray-700 mt-3">
+    💡 Aussi utile pour sauvegarder des valeurs précédentes ou un intervalle de temps.
+  </p>
+</div>
+
+<!-- SLIDE 40: USEMEMO, USECALLBACK & MEMO -->
+<div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">
+    28. useMemo, useCallback et React.memo
+  </h2>
+
+  <h3 class="font-bold text-2xl text-emerald-600">1️⃣ useMemo()</h3>
+  <p class="text-lg text-gray-700">
+    Mémorise le résultat d’un calcul pour éviter de le refaire à chaque rendu.
+  </p>
+  <pre><code>const total = useMemo(() => {
+  console.log("Calcul du total...");
+  return items.reduce((sum, i) => sum + i.price, 0);
+}, [items]);</code></pre>
+
+  <h3 class="font-bold text-2xl text-emerald-600 mt-4">2️⃣ useCallback()</h3>
+  <p class="text-lg text-gray-700">
+    Mémorise une fonction pour éviter de la recréer à chaque rendu.
+  </p>
+  <pre><code>const handleClick = useCallback(() => {
+  console.log("Clic !");
+}, []);</code></pre>
+
+  <h3 class="font-bold text-2xl text-emerald-600 mt-4">3️⃣ React.memo()</h3>
+  <p class="text-lg text-gray-700">
+    Empêche le re-rendu d’un composant si ses props n’ont pas changé.
+  </p>
+  <pre><code>const Enfant = React.memo(({ name }) => {
+  console.log("Rendu :", name);
+  return &lt;p&gt;Bonjour {name}&lt;/p&gt;;
+});</code></pre>
+
+  <p class="text-xl text-emerald-600 font-semibold mt-4">
+    ✅ Idéal pour améliorer les performances dans des listes ou composants coûteux.
+  </p>
+</div>
+<!-- SLIDE 39: REDUX TOOLKIT (INTRODUCTION) -->
+<div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">29. Redux Toolkit : Introduction</h2>
+  <p class="text-lg text-gray-700">
+    <b>Redux Toolkit (RTK)</b> est la <b>version moderne et simplifiée</b> de Redux.  
+    Il permet de gérer l’état global de l’application avec moins de code et sans complexité.
+  </p>
+  <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700 mt-4">
+    <li><b>Problème :</b> Redux classique était trop verbeux (actions, reducers, switch...)</li>
+    <li><b>Solution :</b> RTK fournit des fonctions prêtes à l’emploi comme <code>createSlice</code> et <code>configureStore</code>.</li>
+    <li>Utilisé pour stocker et partager les données globales (ex : utilisateur, panier, thème...).</li>
+  </ul>
+  <p class="text-xl text-emerald-600 font-semibold mt-6">
+    ⭐ Standard officiel recommandé par l’équipe Redux.
+  </p>
+</div>
+
+<!-- SLIDE 40: REDUX TOOLKIT (CONCEPTS DE BASE) -->
+<div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">30. Redux Toolkit : Concepts de Base</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+      <h3 class="font-bold text-2xl text-sky-600">Store</h3>
+      <p class="text-lg text-gray-700">
+        Contient l’état global de l’application (comme un grand "state global").
+      </p>
+    </div>
+    <div>
+      <h3 class="font-bold text-2xl text-sky-600">Slice</h3>
+      <p class="text-lg text-gray-700">
+        Représente une portion du store : un ensemble d’état + reducers associés.
+      </p>
+    </div>
+  </div>
+  <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700 mt-4">
+    <li><code>createSlice()</code> → crée actions + reducers automatiquement.</li>
+    <li><code>configureStore()</code> → crée le store et combine les slices.</li>
+    <li><code>useSelector()</code> → lit une donnée du store.</li>
+    <li><code>useDispatch()</code> → déclenche une action.</li>
+  </ul>
+</div>
+
+<!-- SLIDE 41: REDUX TOOLKIT (EXEMPLE DE SLICE) -->
+<div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">31. Exemple : Création d’un Slice</h2>
+  <pre><code>import { createSlice, configureStore } from "@reduxjs/toolkit";
+
+const compteurSlice = createSlice({
+  name: "compteur",
+  initialState: { valeur: 0 },
+  reducers: {
+    incrementer: (state) => { state.valeur += 1 },
+    decrementer: (state) => { state.valeur -= 1 },
+  },
+});
+
+export const { incrementer, decrementer } = compteurSlice.actions;
+
+export const store = configureStore({
+  reducer: { compteur: compteurSlice.reducer },
+});</code></pre>
+  <p class="text-lg text-gray-700 mt-4">
+    🧠 <b>Avantage :</b> moins de code, immutabilité gérée automatiquement par <b>Immer</b>.
+  </p>
+</div>
+
+<!-- SLIDE 42: REDUX TOOLKIT (UTILISATION DANS REACT) -->
+<div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">32. Redux Toolkit : Utilisation dans React</h2>
+  <pre><code>import { Provider, useDispatch, useSelector } from "react-redux";
+import { store, incrementer, decrementer } from "./store";
+
+function Compteur() {
+  const valeur = useSelector((state) => state.compteur.valeur);
+  const dispatch = useDispatch();
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Valeur : {valeur}&lt;/h2&gt;
+      &lt;button onClick={() => dispatch(incrementer())}&gt;+&lt;/button&gt;
+      &lt;button onClick={() => dispatch(decrementer())}&gt;-&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default function App() {
+  return (
+    &lt;Provider store={store}&gt;
+      &lt;Compteur /&gt;
+    &lt;/Provider&gt;
+  );
+}</code></pre>
+  <p class="text-xl text-emerald-600 font-semibold mt-4">
+    ⚡ Centralise l’état global et rend la synchronisation des données plus simple.
+  </p>
+</div>
+
+      <!-- Navigation -->
+      <div
+        id="navigation"
+        class="bg-gray-50 border-t border-gray-200 p-3 md:p-4 flex justify-between items-center"
+      >
+        <button
+          id="prevBtn"
+          class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-3 md:px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm md:text-base"
+        >
+          Précédent
+        </button>
+        <div id="slide-counter" class="text-gray-600 text-xs md:text-sm font-medium"></div>
+        <button
+          id="nextBtn"
+          class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm md:text-base"
+        >
+          Suivant
+        </button>
+      </div>
+
+      <!-- FOOTER AJOUTÉ -->
+      <footer
+        class="p-3 text-center text-sm text-gray-500 bg-gray-50 border-t border-gray-200"
+      >
+        Fait avec ❤️ par Oussama Elhousni
+      </footer>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>

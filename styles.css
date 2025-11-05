@@ -64,7 +64,7 @@ code {
     font-size: 1rem !important;
   }
   
- pre {
+  pre {
     font-size: 0.8rem !important;
     padding: 0.75rem !important;
     overflow-x: auto !important;
@@ -85,5 +85,4 @@ code {
   .text-5xl {
     font-size: 2rem !important;
   }
-
 }

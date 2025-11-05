@@ -1250,102 +1250,209 @@ function FocusInput() {
     ✅ Idéal pour améliorer les performances dans des listes ou composants coûteux.
   </p>
 </div>
-<!-- SLIDE 39: REDUX TOOLKIT (INTRODUCTION) -->
+<!-- SLIDE 29: SÉPARATEUR PARTIE 3 -->
+<div class="slide text-center bg-sky-500 text-white">
+  <h2 class="text-4xl md:text-5xl font-extrabold">PARTIE 3 : Navigation & Gestion d’État</h2>
+  <p class=" text-2xl md:text-3xl  mt-4">React Router DOM & Redux Toolkit</p>
+</div>
+<!-- SLIDE 30: REACT ROUTER DOM (INTRODUCTION) -->
 <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
-  <h2 class="text-4xl font-bold text-gray-800 mb-6">29. Redux Toolkit : Introduction</h2>
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">30. React Router DOM : Introduction</h2>
   <p class="text-lg text-gray-700">
-    <b>Redux Toolkit (RTK)</b> est la <b>version moderne et simplifiée</b> de Redux.  
-    Il permet de gérer l’état global de l’application avec moins de code et sans complexité.
+    <b>React Router DOM</b> permet de gérer la navigation entre plusieurs pages dans une
+    application <b>Single Page Application (SPA)</b> sans rechargement complet du navigateur.
   </p>
   <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700 mt-4">
-    <li><b>Problème :</b> Redux classique était trop verbeux (actions, reducers, switch...)</li>
-    <li><b>Solution :</b> RTK fournit des fonctions prêtes à l’emploi comme <code>createSlice</code> et <code>configureStore</code>.</li>
-    <li>Utilisé pour stocker et partager les données globales (ex : utilisateur, panier, thème...).</li>
+    <li><b>SPA :</b> Une seule page HTML, le contenu change selon la route.</li>
+    <li><b>React Router :</b> Lie les chemins (URL) à des composants React.</li>
+    <li>Supporte les <b>paramètres dynamiques</b> et la <b>navigation imbriquée</b>.</li>
   </ul>
   <p class="text-xl text-emerald-600 font-semibold mt-6">
-    ⭐ Standard officiel recommandé par l’équipe Redux.
+    ⭐ Navigation fluide, sans rechargement complet.
   </p>
 </div>
 
-<!-- SLIDE 40: REDUX TOOLKIT (CONCEPTS DE BASE) -->
+<!-- SLIDE 31: INSTALLATION & CONFIGURATION -->
 <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
-  <h2 class="text-4xl font-bold text-gray-800 mb-6">30. Redux Toolkit : Concepts de Base</h2>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <div>
-      <h3 class="font-bold text-2xl text-sky-600">Store</h3>
-      <p class="text-lg text-gray-700">
-        Contient l’état global de l’application (comme un grand "state global").
-      </p>
-    </div>
-    <div>
-      <h3 class="font-bold text-2xl text-sky-600">Slice</h3>
-      <p class="text-lg text-gray-700">
-        Représente une portion du store : un ensemble d’état + reducers associés.
-      </p>
-    </div>
-  </div>
-  <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700 mt-4">
-    <li><code>createSlice()</code> → crée actions + reducers automatiquement.</li>
-    <li><code>configureStore()</code> → crée le store et combine les slices.</li>
-    <li><code>useSelector()</code> → lit une donnée du store.</li>
-    <li><code>useDispatch()</code> → déclenche une action.</li>
-  </ul>
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">31. Installation & Configuration</h2>
+  <h3 class="font-bold text-2xl text-sky-600">Installation :</h3>
+  <pre><code>npm install react-router-dom</code></pre>
+  <h3 class="font-bold text-2xl text-sky-600 mt-4">Structure de base :</h3>
+  <pre><code>import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./Home";
+import About from "./About";
+
+function App() {
+  return (
+    &lt;BrowserRouter&gt;
+      &lt;Routes&gt;
+        &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+        &lt;Route path="/about" element={&lt;About /&gt;} /&gt;
+      &lt;/Routes&gt;
+    &lt;/BrowserRouter&gt;
+  );
+}</code></pre>
+  <p class="text-lg text-gray-500 italic mt-4">
+    💡 BrowserRouter enveloppe toute l’application et gère l’historique de navigation.
+  </p>
 </div>
 
-<!-- SLIDE 41: REDUX TOOLKIT (EXEMPLE DE SLICE) -->
+<!-- SLIDE 32: NAVIGATION & LINK -->
 <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
-  <h2 class="text-4xl font-bold text-gray-800 mb-6">31. Exemple : Création d’un Slice</h2>
-  <pre><code>import { createSlice, configureStore } from "@reduxjs/toolkit";
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">32. Navigation avec &lt;Link&gt; et useNavigate</h2>
+  <h3 class="font-bold text-2xl text-emerald-600">&lt;Link&gt; : Navigation sans rechargement</h3>
+  <pre><code>import { Link } from "react-router-dom";
 
-const compteurSlice = createSlice({
-  name: "compteur",
-  initialState: { valeur: 0 },
+function Navbar() {
+  return (
+    &lt;nav&gt;
+      &lt;Link to="/"&gt;Accueil&lt;/Link&gt;
+      &lt;Link to="/about"&gt;À propos&lt;/Link&gt;
+    &lt;/nav&gt;
+  );
+}</code></pre>
+
+  <h3 class="font-bold text-2xl text-emerald-600 mt-4">useNavigate() : Navigation programmée</h3>
+  <pre><code>import { useNavigate } from "react-router-dom";
+
+function Login() {
+  const navigate = useNavigate();
+  const handleLogin = () =&gt; {
+    navigate("/dashboard");
+  };
+  return &lt;button onClick={handleLogin}&gt;Se connecter&lt;/button&gt;;
+}</code></pre>
+</div>
+
+<!-- SLIDE 33: ROUTES DYNAMIQUES & PROTÉGÉES -->
+<div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">33. Routes Dynamiques & Protégées</h2>
+  <h3 class="font-bold text-2xl text-sky-600">Paramètres dynamiques</h3>
+  <pre><code>import { useParams } from "react-router-dom";
+
+function Profil() {
+  const { id } = useParams();
+  return &lt;h2&gt;Profil utilisateur : {id}&lt;/h2&gt;;
+}
+// Déclaration
+&lt;Route path="/profil/:id" element={&lt;Profil /&gt;} /&gt;</code></pre>
+
+  <h3 class="font-bold text-2xl text-sky-600 mt-4">Routes protégées</h3>
+  <pre><code>import { Navigate } from "react-router-dom";
+
+function ProtectedRoute({ isAuth, children }) {
+  return isAuth ? children : &lt;Navigate to="/login" /&gt;;
+}</code></pre>
+  <p class="text-lg text-gray-700 mt-3">
+    🔒 Empêche l’accès aux utilisateurs non connectés.
+  </p>
+</div>
+
+<!-- SLIDE 34: REDUX TOOLKIT (INTRODUCTION) -->
+<div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">34. Redux Toolkit : Introduction</h2>
+  <p class="text-lg text-gray-700">
+    <b>Redux Toolkit (RTK)</b> simplifie la gestion de l’état global en éliminant
+    la complexité du Redux classique.
+  </p>
+  <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700 mt-4">
+    <li><b>Problème :</b> Redux classique est verbeux (actions, switch...)</li>
+    <li><b>Solution :</b> RTK fournit <code>createSlice()</code> & <code>configureStore()</code>.</li>
+    <li>Permet de partager un état global entre plusieurs composants.</li>
+  </ul>
+  <pre class="mt-4"><code>npm install @reduxjs/toolkit react-redux</code></pre>
+  <p class="text-xl text-emerald-600 font-semibold mt-6">
+    ⭐ Recommandé officiellement par l’équipe Redux.
+  </p>
+</div>
+
+<!-- SLIDE 35: CONFIGURATION COMPLÈTE DE REDUX TOOLKIT -->
+<div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+  <h2 class=" text-2xl md:text-4xl font-bold text-gray-800 mb-6">
+    35. Configuration complète de Redux Toolkit
+  </h2>
+
+  <h3 class="font-bold text-2xl  text-sky-600">1️⃣ Créer un Slice</h3>
+  <pre><code>// src/features/counterSlice.js
+import { createSlice } from "@reduxjs/toolkit";
+
+export const counterSlice = createSlice({
+  name: "counter",
+  initialState: { value: 0 },
   reducers: {
-    incrementer: (state) => { state.valeur += 1 },
-    decrementer: (state) => { state.valeur -= 1 },
+    increment: (state) =&gt; { state.value += 1 },
+    decrement: (state) =&gt; { state.value -= 1 },
+    reset: (state) =&gt; { state.value = 0 },
   },
 });
 
-export const { incrementer, decrementer } = compteurSlice.actions;
+export const { increment, decrement, reset } = counterSlice.actions;
+export default counterSlice.reducer;</code></pre>
+
+  <h3 class="font-bold text-2xl text-sky-600 mt-4">2️⃣ Configurer le Store</h3>
+  <pre><code>// src/app/store.js
+import { configureStore } from "@reduxjs/toolkit";
+import counterReducer from "../features/counterSlice";
 
 export const store = configureStore({
-  reducer: { compteur: compteurSlice.reducer },
+  reducer: { counter: counterReducer },
 });</code></pre>
-  <p class="text-lg text-gray-700 mt-4">
-    🧠 <b>Avantage :</b> moins de code, immutabilité gérée automatiquement par <b>Immer</b>.
-  </p>
+
+  <h3 class="font-bold text-2xl text-sky-600 mt-4">3️⃣ Connecter le Store à l’Application</h3>
+  <pre><code>// src/main.jsx
+import { Provider } from "react-redux";
+import { store } from "./app/store";
+import App from "./App";
+
+import ReactDOM from "react-dom/client";
+ReactDOM.createRoot(document.getElementById("root")).render(
+  &lt;Provider store={store}&gt;
+    &lt;App /&gt;
+  &lt;/Provider&gt;
+);</code></pre>
 </div>
 
-<!-- SLIDE 42: REDUX TOOLKIT (UTILISATION DANS REACT) -->
+<!-- SLIDE 36: UTILISATION DANS UN COMPOSANT -->
 <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
-  <h2 class="text-4xl font-bold text-gray-800 mb-6">32. Redux Toolkit : Utilisation dans React</h2>
-  <pre><code>import { Provider, useDispatch, useSelector } from "react-redux";
-import { store, incrementer, decrementer } from "./store";
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">
+    36. Utilisation de Redux Toolkit dans un composant
+  </h2>
+  <pre><code>import { useDispatch, useSelector } from "react-redux";
+import { increment, decrement, reset } from "./features/counterSlice";
 
-function Compteur() {
-  const valeur = useSelector((state) => state.compteur.valeur);
+export default function Counter() {
+  const count = useSelector((state) =&gt; state.counter.value);
   const dispatch = useDispatch();
 
   return (
     &lt;div&gt;
-      &lt;h2&gt;Valeur : {valeur}&lt;/h2&gt;
-      &lt;button onClick={() => dispatch(incrementer())}&gt;+&lt;/button&gt;
-      &lt;button onClick={() => dispatch(decrementer())}&gt;-&lt;/button&gt;
+      &lt;h2&gt;Valeur : {count}&lt;/h2&gt;
+      &lt;button onClick={() =&gt; dispatch(increment())}&gt;+&lt;/button&gt;
+      &lt;button onClick={() =&gt; dispatch(decrement())}&gt;-&lt;/button&gt;
+      &lt;button onClick={() =&gt; dispatch(reset())}&gt;Reset&lt;/button&gt;
     &lt;/div&gt;
-  );
-}
-
-export default function App() {
-  return (
-    &lt;Provider store={store}&gt;
-      &lt;Compteur /&gt;
-    &lt;/Provider&gt;
   );
 }</code></pre>
   <p class="text-xl text-emerald-600 font-semibold mt-4">
-    ⚡ Centralise l’état global et rend la synchronisation des données plus simple.
+    ⚡ Redux Toolkit simplifie tout le flux : <b>State → Action → Reducer → UI</b>
   </p>
 </div>
+
+<!-- SLIDE 37: BONNES PRATIQUES REDUX TOOLKIT -->
+<div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+  <h2 class="text-4xl font-bold text-gray-800 mb-6">37. Bonnes Pratiques Redux Toolkit</h2>
+  <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
+    <li>📁 Organiser vos fichiers par <b>feature</b> (slice, store, composant).</li>
+    <li>🔄 Utiliser <code>createAsyncThunk()</code> pour les appels API asynchrones.</li>
+    <li>🧩 Éviter de stocker des objets DOM ou fonctions dans le store (données sérialisables uniquement).</li>
+    <li>🧠 Préférer les <b>selectors</b> pour lire les données du store.</li>
+    <li>⚙️ Utiliser <code>devTools</code> de Redux pour visualiser les actions et l’état.</li>
+  </ul>
+  <p class="text-xl text-emerald-600 font-semibold mt-6">
+    ✅ Une bonne configuration Redux rend votre application <b>prévisible, scalable et débogable</b>.
+  </p>
+</div>
+
 
       <!-- Navigation -->
       <div

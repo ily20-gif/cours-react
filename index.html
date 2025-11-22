@@ -1250,35 +1250,145 @@ function FocusInput() {
     ✅ Idéal pour améliorer les performances dans des listes ou composants coûteux.
   </p>
 </div>
-<!-- SLIDE 29: SÉPARATEUR PARTIE 3 -->
-<div class="slide text-center bg-sky-500 text-white">
-  <h2 class="text-4xl md:text-5xl font-extrabold">PARTIE 3 : Navigation & Gestion d’État</h2>
-  <p class=" text-2xl md:text-3xl  mt-4">React Router DOM & Redux Toolkit</p>
-</div>
-<!-- SLIDE 30: REACT ROUTER DOM (INTRODUCTION) -->
-<div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
-  <h2 class="text-4xl font-bold text-gray-800 mb-6">30. React Router DOM : Introduction</h2>
-  <p class="text-lg text-gray-700">
-    <b>React Router DOM</b> permet de gérer la navigation entre plusieurs pages dans une
-    application <b>Single Page Application (SPA)</b> sans rechargement complet du navigateur.
-  </p>
-  <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700 mt-4">
-    <li><b>SPA :</b> Une seule page HTML, le contenu change selon la route.</li>
-    <li><b>React Router :</b> Lie les chemins (URL) à des composants React.</li>
-    <li>Supporte les <b>paramètres dynamiques</b> et la <b>navigation imbriquée</b>.</li>
-  </ul>
-  <p class="text-xl text-emerald-600 font-semibold mt-6">
-    ⭐ Navigation fluide, sans rechargement complet.
-  </p>
-</div>
 
-<!-- SLIDE 31: INSTALLATION & CONFIGURATION -->
-<div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
-  <h2 class="text-4xl font-bold text-gray-800 mb-6">31. Installation & Configuration</h2>
-  <h3 class="font-bold text-2xl text-sky-600">Installation :</h3>
-  <pre><code>npm install react-router-dom</code></pre>
-  <h3 class="font-bold text-2xl text-sky-600 mt-4">Structure de base :</h3>
-  <pre><code>import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+
+
+
+
+
+ <!-- SLIDE 41: USEREDUCER -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            29. Hook useReducer : gérer des états complexes
+          </h2>
+          <p class="text-lg text-gray-700">
+            <b>useReducer</b> est une alternative à <code>useState</code> pour
+            les états plus complexes (objets, multiples sous-valeurs) ou avec
+            beaucoup de transitions.
+          </p>
+          <ul class="list-disc pl-6 space-y-2 text-xl text-gray-700 mt-4">
+            <li>Basé sur le pattern <b>state + action → nouveau state</b>.</li>
+            <li>Ressemble beaucoup à Redux (même logique de reducer).</li>
+          </ul>
+          <pre><code>import { useReducer } from "react";
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "increment":
+      return { count: state.count + 1 };
+    case "decrement":
+      return { count: state.count - 1 };
+    case "reset":
+      return { count: 0 };
+    default:
+      return state;
+  }
+}
+
+function Counter() {
+  const [state, dispatch] = useReducer(reducer, { count: 0 });
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Compteur : {state.count}&lt;/p&gt;
+      &lt;button onClick={() =&gt; dispatch({ type: "increment" })}&gt;+&lt;/button&gt;
+      &lt;button onClick={() =&gt; dispatch({ type: "decrement" })}&gt;-&lt;/button&gt;
+      &lt;button onClick={() =&gt; dispatch({ type: "reset" })}&gt;Reset&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+          <p class="text-lg text-gray-500 italic mt-4">
+            Très utile pour des formulaires complexes, des wizards, ou des
+            composants avec beaucoup de règles métier.
+          </p>
+        </div>
+
+        <!-- SLIDE 42: CUSTOM HOOKS -->
+        <div class="slide">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            30. Custom Hooks : réutiliser la logique
+          </h2>
+          <p class="text-lg text-gray-700">
+            Un <b>custom hook</b> est une fonction qui commence par
+            <code>use...</code> et qui permet de <b>factoriser de la logique
+            React</b> (state, effets, contexte) pour la réutiliser dans
+            plusieurs composants.
+          </p>
+          <ul class="list-disc pl-6 space-y-2 text-xl text-gray-700 mt-4">
+            <li>Permet d’éviter les duplications (DRY).</li>
+            <li>Peut combiner plusieurs hooks internes (useState, useEffect…).</li>
+          </ul>
+          <h3 class="font-bold text-2xl text-sky-600 mt-4">
+            Exemple : hook <code>useToggle</code>
+          </h3>
+          <pre><code>import { useState } from "react";
+
+function useToggle(initialValue = false) {
+  const [value, setValue] = useState(initialValue);
+  const toggle = () => setValue((prev) =&gt; !prev);
+  return { value, toggle };
+}
+
+// Utilisation
+function Switch() {
+  const { value: isOn, toggle } = useToggle();
+
+  return (
+    &lt;button onClick={toggle}&gt;
+      {isOn ? "ON" : "OFF"}
+    &lt;/button&gt;
+  );
+}</code></pre>
+          <p class="text-lg text-gray-500 italic mt-4">
+            Plus tard, on peut créer des custom hooks pour les appels API
+            (<code>useFetch</code>, <code>useAuth</code>, etc.).
+          </p>
+        </div>
+
+
+
+
+ <!-- SLIDE 43: SÉPARATEUR PARTIE 3 -->
+        <div class="slide text-center bg-sky-500 text-white">
+          <h2 class="text-5xl font-extrabold">
+            PARTIE 3 : Navigation & Gestion d’État
+          </h2>
+          <p class="text-3xl mt-4">React Router DOM & Redux Toolkit</p>
+        </div>
+
+        <!-- SLIDE 44: REACT ROUTER DOM (INTRODUCTION) -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            31. React Router DOM : Introduction
+          </h2>
+          <p class="text-lg text-gray-700">
+            <b>React Router DOM</b> permet de gérer la navigation entre
+            plusieurs pages dans une application
+            <b>Single Page Application (SPA)</b> sans rechargement complet du
+            navigateur.
+          </p>
+          <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700 mt-4">
+            <li><b>SPA :</b> Une seule page HTML, le contenu change selon la route.</li>
+            <li><b>React Router :</b> Lie les chemins (URL) à des composants React.</li>
+            <li>Supporte les <b>paramètres dynamiques</b> et la <b>navigation imbriquée</b>.</li>
+          </ul>
+          <p class="text-xl text-emerald-600 font-semibold mt-6">
+            ⭐ Navigation fluide, sans rechargement complet.
+          </p>
+        </div>
+
+        <!-- SLIDE 45: INSTALLATION & CONFIGURATION -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            32. Installation & Configuration
+          </h2>
+          <h3 class="font-bold text-2xl text-sky-600">Installation :</h3>
+          <pre><code>npm install react-router-dom</code></pre>
+          <h3 class="font-bold text-2xl text-sky-600 mt-4">
+            Structure de base :
+          </h3>
+          <pre><code>import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Home";
 import About from "./About";
 
@@ -1292,16 +1402,21 @@ function App() {
     &lt;/BrowserRouter&gt;
   );
 }</code></pre>
-  <p class="text-lg text-gray-500 italic mt-4">
-    💡 BrowserRouter enveloppe toute l’application et gère l’historique de navigation.
-  </p>
-</div>
+          <p class="text-lg text-gray-500 italic mt-4">
+            💡 <code>BrowserRouter</code> enveloppe toute l’application et gère
+            l’historique de navigation.
+          </p>
+        </div>
 
-<!-- SLIDE 32: NAVIGATION & LINK -->
-<div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
-  <h2 class="text-4xl font-bold text-gray-800 mb-6">32. Navigation avec &lt;Link&gt; et useNavigate</h2>
-  <h3 class="font-bold text-2xl text-emerald-600">&lt;Link&gt; : Navigation sans rechargement</h3>
-  <pre><code>import { Link } from "react-router-dom";
+        <!-- SLIDE 46: NAVIGATION & LINK -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            33. Navigation avec &lt;Link&gt; et useNavigate
+          </h2>
+          <h3 class="font-bold text-2xl text-emerald-600">
+            &lt;Link&gt; : Navigation sans rechargement
+          </h3>
+          <pre><code>import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -1312,8 +1427,10 @@ function Navbar() {
   );
 }</code></pre>
 
-  <h3 class="font-bold text-2xl text-emerald-600 mt-4">useNavigate() : Navigation programmée</h3>
-  <pre><code>import { useNavigate } from "react-router-dom";
+          <h3 class="font-bold text-2xl text-emerald-600 mt-4">
+            useNavigate() : Navigation programmée
+          </h3>
+          <pre><code>import { useNavigate } from "react-router-dom";
 
 function Login() {
   const navigate = useNavigate();
@@ -1322,58 +1439,141 @@ function Login() {
   };
   return &lt;button onClick={handleLogin}&gt;Se connecter&lt;/button&gt;;
 }</code></pre>
-</div>
+        </div>
 
-<!-- SLIDE 33: ROUTES DYNAMIQUES & PROTÉGÉES -->
-<div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
-  <h2 class="text-4xl font-bold text-gray-800 mb-6">33. Routes Dynamiques & Protégées</h2>
-  <h3 class="font-bold text-2xl text-sky-600">Paramètres dynamiques</h3>
-  <pre><code>import { useParams } from "react-router-dom";
+        <!-- SLIDE 47: ROUTES IMBRIQUÉES & OUTLET -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            34. Routes Imbriquées &lt;Outlet /&gt;
+          </h2>
+          <p class="text-lg text-gray-700">
+            Les <b>routes imbriquées</b> permettent de partager un layout
+            (header, sidebar…) entre plusieurs pages enfants.  
+            Le composant <code>&lt;Outlet /&gt;</code> indique où le contenu
+            de la route enfant sera rendu.
+          </p>
+          <h3 class="font-bold text-2xl text-sky-600 mt-4">
+            1️⃣ Déclaration des routes imbriquées
+          </h3>
+          <pre><code>// App.jsx
+import { Routes, Route } from "react-router-dom";
+import DashboardLayout from "./DashboardLayout";
+import Overview from "./Overview";
+import Settings from "./Settings";
+
+function App() {
+  return (
+    &lt;Routes&gt;
+      &lt;Route path="/dashboard" element={&lt;DashboardLayout /&gt;}&gt;
+        &lt;Route index element={&lt;Overview /&gt;} /&gt;
+        &lt;Route path="settings" element={&lt;Settings /&gt;} /&gt;
+      &lt;/Route&gt;
+    &lt;/Routes&gt;
+  );
+}</code></pre>
+
+          <h3 class="font-bold text-2xl text-sky-600 mt-4">
+            2️⃣ Utilisation de &lt;Outlet /&gt; dans le layout
+          </h3>
+          <pre><code>import { Outlet, Link } from "react-router-dom";
+
+function DashboardLayout() {
+  return (
+    &lt;div&gt;
+      &lt;nav&gt;
+        &lt;Link to="/dashboard"&gt;Vue globale&lt;/Link&gt;
+        &lt;Link to="/dashboard/settings"&gt;Paramètres&lt;/Link&gt;
+      &lt;/nav&gt;
+
+      &lt;main&gt;
+        &lt;Outlet /&gt; {/* Ici s’affiche la route enfant */} 
+      &lt;/main&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+        </div>
+
+        <!-- SLIDE 48: ROUTES DYNAMIQUES, PROTÉGÉES & useSearchParams -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            35. Routes Dynamiques, Protégées & useSearchParams
+          </h2>
+          <h3 class="font-bold text-2xl text-sky-600">Paramètres dynamiques</h3>
+          <pre><code>import { useParams } from "react-router-dom";
 
 function Profil() {
   const { id } = useParams();
   return &lt;h2&gt;Profil utilisateur : {id}&lt;/h2&gt;;
 }
+
 // Déclaration
 &lt;Route path="/profil/:id" element={&lt;Profil /&gt;} /&gt;</code></pre>
 
-  <h3 class="font-bold text-2xl text-sky-600 mt-4">Routes protégées</h3>
-  <pre><code>import { Navigate } from "react-router-dom";
+          <h3 class="font-bold text-2xl text-sky-600 mt-4">
+            Lire les query params avec useSearchParams
+          </h3>
+          <pre><code>import { useSearchParams } from "react-router-dom";
+
+function Products() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const page = searchParams.get("page") || "1";
+  const category = searchParams.get("category") || "all";
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Page : {page}&lt;/h2&gt;
+      &lt;p&gt;Catégorie : {category}&lt;/p&gt;
+      &lt;button onClick={() =&gt; setSearchParams({ page: "2", category })}&gt;
+        Aller à la page 2
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+          <h3 class="font-bold text-2xl text-sky-600 mt-4">Routes protégées</h3>
+          <pre><code>import { Navigate } from "react-router-dom";
 
 function ProtectedRoute({ isAuth, children }) {
   return isAuth ? children : &lt;Navigate to="/login" /&gt;;
 }</code></pre>
-  <p class="text-lg text-gray-700 mt-3">
-    🔒 Empêche l’accès aux utilisateurs non connectés.
-  </p>
-</div>
+          <p class="text-lg text-gray-700 mt-3">
+            🔒 On protège une route en enveloppant le composant cible dans
+            <code>ProtectedRoute</code>.
+          </p>
+        </div>
 
-<!-- SLIDE 34: REDUX TOOLKIT (INTRODUCTION) -->
-<div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
-  <h2 class="text-4xl font-bold text-gray-800 mb-6">34. Redux Toolkit : Introduction</h2>
-  <p class="text-lg text-gray-700">
-    <b>Redux Toolkit (RTK)</b> simplifie la gestion de l’état global en éliminant
-    la complexité du Redux classique.
-  </p>
-  <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700 mt-4">
-    <li><b>Problème :</b> Redux classique est verbeux (actions, switch...)</li>
-    <li><b>Solution :</b> RTK fournit <code>createSlice()</code> & <code>configureStore()</code>.</li>
-    <li>Permet de partager un état global entre plusieurs composants.</li>
-  </ul>
-  <pre class="mt-4"><code>npm install @reduxjs/toolkit react-redux</code></pre>
-  <p class="text-xl text-emerald-600 font-semibold mt-6">
-    ⭐ Recommandé officiellement par l’équipe Redux.
-  </p>
-</div>
+        <!-- SLIDE 49: REDUX TOOLKIT (INTRODUCTION) -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            36. Redux Toolkit : Introduction
+          </h2>
+          <p class="text-lg text-gray-700">
+            <b>Redux Toolkit (RTK)</b> simplifie la gestion de l’état global en
+            éliminant la complexité du Redux classique.
+          </p>
+          <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700 mt-4">
+            <li><b>Problème :</b> Redux classique est verbeux (actions, switch...).</li>
+            <li>
+              <b>Solution :</b> RTK fournit
+              <code>createSlice()</code> &amp; <code>configureStore()</code>.
+            </li>
+            <li>Permet de partager un état global entre plusieurs composants.</li>
+          </ul>
+          <pre class="mt-4"><code>npm install @reduxjs/toolkit react-redux</code></pre>
+          <p class="text-xl text-emerald-600 font-semibold mt-6">
+            ⭐ Recommandé officiellement par l’équipe Redux.
+          </p>
+        </div>
 
-<!-- SLIDE 35: CONFIGURATION COMPLÈTE DE REDUX TOOLKIT -->
-<div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
-  <h2 class="text-4xl font-bold text-gray-800 mb-6">
-    35. Configuration complète de Redux Toolkit
-  </h2>
+        <!-- SLIDE 50: CONFIGURATION COMPLÈTE DE REDUX TOOLKIT -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            37. Configuration complète de Redux Toolkit
+          </h2>
 
-  <h3 class="font-bold text-2xl  text-sky-600">1️⃣ Créer un Slice</h3>
-  <pre><code>// src/features/counterSlice.js
+          <h3 class="font-bold text-2xl text-sky-600">1️⃣ Créer un Slice</h3>
+          <pre><code>// src/features/counterSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
 export const counterSlice = createSlice({
@@ -1389,8 +1589,10 @@ export const counterSlice = createSlice({
 export const { increment, decrement, reset } = counterSlice.actions;
 export default counterSlice.reducer;</code></pre>
 
-  <h3 class="font-bold text-2xl text-sky-600 mt-4">2️⃣ Configurer le Store</h3>
-  <pre><code>// src/app/store.js
+          <h3 class="font-bold text-2xl text-sky-600 mt-4">
+            2️⃣ Configurer le Store
+          </h3>
+          <pre><code>// src/app/store.js
 import { configureStore } from "@reduxjs/toolkit";
 import counterReducer from "../features/counterSlice";
 
@@ -1398,8 +1600,10 @@ export const store = configureStore({
   reducer: { counter: counterReducer },
 });</code></pre>
 
-  <h3 class="font-bold text-2xl text-sky-600 mt-4">3️⃣ Connecter le Store à l’Application</h3>
-  <pre><code>// src/main.jsx
+          <h3 class="font-bold text-2xl text-sky-600 mt-4">
+            3️⃣ Connecter le Store à l’Application
+          </h3>
+          <pre><code>// src/main.jsx
 import { Provider } from "react-redux";
 import { store } from "./app/store";
 import App from "./App";
@@ -1410,14 +1614,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     &lt;App /&gt;
   &lt;/Provider&gt;
 );</code></pre>
-</div>
+        </div>
 
-<!-- SLIDE 36: UTILISATION DANS UN COMPOSANT -->
-<div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
-  <h2 class="text-4xl font-bold text-gray-800 mb-6">
-    36. Utilisation de Redux Toolkit dans un composant
-  </h2>
-  <pre><code>import { useDispatch, useSelector } from "react-redux";
+        <!-- SLIDE 51: UTILISATION DANS UN COMPOSANT -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            38. Utilisation de Redux Toolkit dans un composant
+          </h2>
+          <pre><code>import { useDispatch, useSelector } from "react-redux";
 import { increment, decrement, reset } from "./features/counterSlice";
 
 export default function Counter() {
@@ -1433,25 +1637,345 @@ export default function Counter() {
     &lt;/div&gt;
   );
 }</code></pre>
-  <p class="text-xl text-emerald-600 font-semibold mt-4">
-    ⚡ Redux Toolkit simplifie tout le flux : <b>State → Action → Reducer → UI</b>
-  </p>
-</div>
+          <p class="text-xl text-emerald-600 font-semibold mt-4">
+            ⚡ Redux Toolkit simplifie tout le flux :
+            <b>State → Action → Reducer → UI</b>
+          </p>
+        </div>
 
-<!-- SLIDE 37: BONNES PRATIQUES REDUX TOOLKIT -->
-<div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
-  <h2 class="text-4xl font-bold text-gray-800 mb-6">37. Bonnes Pratiques Redux Toolkit</h2>
-  <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
-    <li>📁 Organiser vos fichiers par <b>feature</b> (slice, store, composant).</li>
-    <li>🔄 Utiliser <code>createAsyncThunk()</code> pour les appels API asynchrones.</li>
-    <li>🧩 Éviter de stocker des objets DOM ou fonctions dans le store (données sérialisables uniquement).</li>
-    <li>🧠 Préférer les <b>selectors</b> pour lire les données du store.</li>
-    <li>⚙️ Utiliser <code>devTools</code> de Redux pour visualiser les actions et l’état.</li>
-  </ul>
-  <p class="text-xl text-emerald-600 font-semibold mt-6">
-    ✅ Une bonne configuration Redux rend votre application <b>prévisible, scalable et débogable</b>.
-  </p>
-</div>
+        <!-- SLIDE 52: BONNES PRATIQUES REDUX TOOLKIT -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            39. Bonnes Pratiques Redux Toolkit
+          </h2>
+          <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
+            <li>📁 Organiser vos fichiers par <b>feature</b> (slice, store, composant).</li>
+            <li>
+              🔄 Utiliser <code>createAsyncThunk()</code> pour les appels API
+              asynchrones.
+            </li>
+            <li>
+              🧩 Éviter de stocker des objets DOM ou fonctions dans le store
+              (données sérialisables uniquement).
+            </li>
+            <li>🧠 Préférer les <b>selectors</b> pour lire les données du store.</li>
+            <li>
+              ⚙️ Utiliser <code>devTools</code> de Redux pour visualiser les
+              actions et l’état.
+            </li>
+          </ul>
+          <p class="text-xl text-emerald-600 font-semibold mt-6">
+            ✅ Une bonne configuration Redux rend votre application
+            <b>prévisible, scalable et débogable</b>.
+          </p>
+        </div>
+
+        <!-- SLIDE 53: REDUX CLASSIQUE -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            40. Redux classique (avant Redux Toolkit)
+          </h2>
+          <p class="text-lg text-gray-700">
+            Avant Redux Toolkit, on utilisait directement la bibliothèque
+            <code>redux</code>. La logique est la même, mais plus
+            <b>verbueuse</b>.
+          </p>
+          <ul class="list-disc pl-6 space-y-2 text-xl text-gray-700 mt-4">
+            <li><b>Store :</b> contient l’état global.</li>
+            <li><b>Reducer :</b> fonction pure (state, action) → nouveau state.</li>
+            <li><b>Actions :</b> objets avec un type (et éventuellement un payload).</li>
+          </ul>
+          <pre><code>import { createStore } from "redux";
+
+// 1️⃣ Reducer
+function counterReducer(state = { count: 0 }, action) {
+  switch (action.type) {
+    case "INCREMENT":
+      return { count: state.count + 1 };
+    case "DECREMENT":
+      return { count: state.count - 1 };
+    default:
+      return state;
+  }
+}
+
+// 2️⃣ Store
+const store = createStore(counterReducer);
+
+// 3️⃣ Dispatch
+store.dispatch({ type: "INCREMENT" });
+console.log(store.getState()); // { count: 1 }</code></pre>
+          <p class="text-lg text-gray-500 italic mt-4">
+            Aujourd’hui, on privilégie Redux Toolkit, mais comprendre Redux
+            classique aide à lire du code legacy.
+          </p>
+        </div>
+
+        <!-- SLIDE 54: PARTIE 4 APIS -->
+        <div class="slide text-center bg-sky-500 text-white">
+          <h2 class="text-5xl font-extrabold">
+            PARTIE 4 : APIs &amp; Intégration Back-End
+          </h2>
+          <p class="text-3xl mt-4">
+            REST, HTTP, JSON, Fetch, Axios &amp; bonnes pratiques
+          </p>
+        </div>
+
+        <!-- SLIDE 55: QU'EST-CE QU'UNE API / REST -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            41. Qu’est-ce qu’une API ? Qu’est-ce qu’une REST API ?
+          </h2>
+          <p class="text-lg text-gray-700">
+            Une <b>API (Application Programming Interface)</b> est une porte
+            d’entrée permettant à un programme d’en appeler un autre pour
+            récupérer ou envoyer des données.
+          </p>
+          <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700 mt-4">
+            <li>
+              <b>API Web :</b> accessible via HTTP(s), généralement au format
+              JSON.
+            </li>
+            <li>
+              <b>REST (REpresentational State Transfer) :</b> style d’API qui
+              utilise les verbes HTTP et des URLs pour manipuler des
+              ressources.
+            </li>
+            <li>
+              Une ressource peut être : <code>/users</code>,
+              <code>/orders</code>, <code>/products</code>, etc.
+            </li>
+          </ul>
+          <p class="text-xl text-emerald-600 font-semibold mt-6">
+            Exemple : <code>GET https://api.example.com/users/42</code> → récupère
+            l’utilisateur avec l’ID 42.
+          </p>
+        </div>
+
+        <!-- SLIDE 56: VERBES HTTP & STATUTS -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            42. Verbes HTTP &amp; Codes de Statut
+          </h2>
+          <h3 class="font-bold text-2xl text-sky-600">Verbes principaux</h3>
+          <ul class="list-disc pl-6 space-y-2 text-xl text-gray-700 mt-2">
+            <li><b>GET :</b> Lire / récupérer des données.</li>
+            <li><b>POST :</b> Créer une nouvelle ressource.</li>
+            <li><b>PUT :</b> Remplacer complètement une ressource.</li>
+            <li><b>PATCH :</b> Modifier partiellement une ressource.</li>
+            <li><b>DELETE :</b> Supprimer une ressource.</li>
+          </ul>
+          <h3 class="font-bold text-2xl text-emerald-600 mt-6">
+            Codes de statut HTTP (réponse serveur)
+          </h3>
+          <ul class="list-disc pl-6 space-y-2 text-xl text-gray-700 mt-2">
+            <li><b>2xx :</b> Succès (200 OK, 201 Created).</li>
+            <li><b>4xx :</b> Erreur côté client (400 Bad Request, 401 Unauthorized, 404 Not Found).</li>
+            <li><b>5xx :</b> Erreur côté serveur (500 Internal Server Error).</li>
+          </ul>
+          <p class="text-lg text-gray-500 italic mt-4">
+            Toujours vérifier le code de statut avant de traiter la réponse JSON.
+          </p>
+        </div>
+
+        <!-- SLIDE 57: ENDPOINT, HEADERS, JSON -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            43. Endpoints, Headers, Body &amp; JSON
+          </h2>
+          <h3 class="font-bold text-2xl text-sky-600">1️⃣ Endpoint</h3>
+          <p class="text-lg text-gray-700">
+            URL d’un service précis, par exemple :
+            <code>https://api.example.com/users?page=2</code>.
+          </p>
+
+          <h3 class="font-bold text-2xl text-sky-600 mt-4">2️⃣ Headers</h3>
+          <p class="text-lg text-gray-700">
+            Métadonnées envoyées avec la requête/réponse :
+          </p>
+          <ul class="list-disc pl-6 space-y-1 text-xl text-gray-700 mt-2">
+            <li><code>Content-Type: application/json</code></li>
+            <li><code>Authorization: Bearer &lt;token&gt;</code></li>
+          </ul>
+
+          <h3 class="font-bold text-2xl text-sky-600 mt-4">3️⃣ Body (corps)</h3>
+          <p class="text-lg text-gray-700">
+            Données envoyées dans une requête (POST/PUT/PATCH), souvent en
+            <b>JSON</b>.
+          </p>
+          <pre><code>// Exemple de payload JSON
+{
+  "name": "Alice",
+  "email": "alice@example.com"
+}</code></pre>
+          <p class="text-lg text-gray-500 italic mt-4">
+            JSON = JavaScript Object Notation : format léger, lisible, idéal
+            pour le Web.
+          </p>
+        </div>
+
+        <!-- SLIDE 58: INTEGRATION AVEC FETCH -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            44. Intégrer une API avec fetch()
+          </h2>
+          <p class="text-lg text-gray-700">
+            <code>fetch</code> est l’API native du navigateur pour faire des
+            requêtes HTTP.
+          </p>
+          <h3 class="font-bold text-2xl text-sky-600 mt-4">
+            Exemple : GET + gestion du chargement / erreur
+          </h3>
+          <pre><code>import { useEffect, useState } from "react";
+
+function Users() {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() =&gt; {
+    async function loadUsers() {
+      try {
+        const res = await fetch("https://jsonplaceholder.typicode.com/users");
+
+        if (!res.ok) {
+          throw new Error("Erreur HTTP : " + res.status);
+        }
+
+        const data = await res.json();
+        setUsers(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadUsers();
+  }, []);
+
+  if (loading) return &lt;p&gt;Chargement...&lt;/p&gt;;
+  if (error) return &lt;p&gt;Erreur : {error}&lt;/p&gt;;
+
+  return (
+    &lt;ul&gt;
+      {users.map((u) =&gt; (
+        &lt;li key={u.id}&gt;{u.name}&lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+}</code></pre>
+        </div>
+
+        <!-- SLIDE 59: AXIOS -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            45. Axios : bibliothèque HTTP
+          </h2>
+          <p class="text-lg text-gray-700">
+            <b>Axios</b> est une bibliothèque populaire pour simplifier les
+            appels HTTP. Elle fonctionne dans le navigateur et dans Node.js.
+          </p>
+          <h3 class="font-bold text-2xl text-sky-600 mt-4">Installation</h3>
+          <pre><code>npm install axios</code></pre>
+
+          <h3 class="font-bold text-2xl text-sky-600 mt-4">Exemple simple</h3>
+          <pre><code>import axios from "axios";
+import { useEffect, useState } from "react";
+
+function Posts() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() =&gt; {
+    axios
+      .get("https://jsonplaceholder.typicode.com/posts")
+      .then((res) =&gt; setPosts(res.data))
+      .catch((err) =&gt; console.error(err));
+  }, []);
+
+  return (
+    &lt;ul&gt;
+      {posts.slice(0, 5).map((p) =&gt; (
+        &lt;li key={p.id}&gt;{p.title}&lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+}</code></pre>
+
+          <h3 class="font-bold text-2xl text-emerald-600 mt-4">
+            Client Axios réutilisable
+          </h3>
+          <pre><code>// apiClient.js
+import axios from "axios";
+
+export const api = axios.create({
+  baseURL: "https://api.monsite.com",
+  headers: {
+    "Content-Type": "application/json",
+  },
+});</code></pre>
+          <p class="text-lg text-gray-500 italic mt-4">
+            On peut ajouter des <b>interceptors</b> pour injecter les tokens
+            d’authentification ou logger les erreurs.
+          </p>
+        </div>
+
+        <!-- SLIDE 60: CUSTOM HOOK API + BONNES PRATIQUES -->
+        <div class="slide p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold text-gray-800 mb-6">
+            46. Bonnes pratiques pour l’intégration API
+          </h2>
+          <ul class="list-disc pl-6 space-y-3 text-xl text-gray-700">
+            <li>
+              📦 <b>Isoler la logique API</b> dans des services ou custom hooks
+              (<code>useApi</code>, <code>useUsers</code>…).
+            </li>
+            <li>
+              🧠 Toujours gérer les états : <code>loading</code>,
+              <code>error</code>, <code>data</code>.
+            </li>
+            <li>
+              🔐 Ne jamais mettre de secrets (token privé, clé API sensible) dans
+              le front. Utiliser un back-end ou des variables d’environnement
+              côté serveur.
+            </li>
+            <li>
+              🧪 Logguer les erreurs (console, Sentry, etc.) et afficher un
+              message clair à l’utilisateur.
+            </li>
+            <li>
+              ♻️ Utiliser des custom hooks + Redux/RTK Query ou TanStack Query
+              pour la mise en cache et la synchronisation serveur.
+            </li>
+          </ul>
+
+          <h3 class="font-bold text-2xl text-sky-600 mt-6">
+            Exemple de custom hook simple avec Axios
+          </h3>
+          <pre><code>import { useEffect, useState } from "react";
+import { api } from "./apiClient";
+
+function useUsers() {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() =&gt; {
+    api
+      .get("/users")
+      .then((res) =&gt; setData(res.data))
+      .catch((err) =&gt; setError(err.message))
+      .finally(() =&gt; setLoading(false));
+  }, []);
+
+  return { data, loading, error };
+}</code></pre>
+          <p class="text-lg text-gray-500 italic mt-4">
+            Ensuite, vos composants deviennent très simples : ils consomment
+            juste le hook et affichent l’UI.
+          </p>
+        </div>
+    
 
 
       <!-- Navigation -->
